@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>InterpolationApp</RootNamespace>
+    <AssemblyName>InterpolationApp</AssemblyName>
+  </PropertyGroup>
+</Project>
