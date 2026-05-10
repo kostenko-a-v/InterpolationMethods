@@ -26,7 +26,7 @@ namespace InterpolationApp
                             $"Вузли x[{i}]={xi} та x[{i+j}]={xij} збігаються.");
 
                     P[i, j] = ((targetX - xi) * P[i + 1, j - 1] - (targetX - xij) * P[i, j - 1]) / denominator;
-                    operationCount += 6;
+                    operationCount += 7;
                 }
             }
             return P[0, n - 1];

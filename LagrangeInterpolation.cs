@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 namespace InterpolationApp
 {
@@ -29,7 +29,7 @@ namespace InterpolationApp
                             "Усі вузли інтерполяції мають бути різними.");
 
                     li *= numerator / denominator;
-                    operationCount += 3;
+                    operationCount += 4;
                 }
 
                 result += inputNodes[i].Y * li;
