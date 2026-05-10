@@ -67,7 +67,7 @@ namespace InterpolationApp
                 string[] parts = line.Split(new[] { ';', ',', ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length < 2)
                     throw new FormatException(
-                        $"Рядок {i + 1}: очікується формат 'x;y', отримано '{line}'.");
+                        $"Рядок {i + 1}: очікується формат 'x;y' (числа будуть округлені за математичними правилами), отримано '{line}'.");
 
                 string strX = parts[0].Trim().Replace(',', '.');
                 string strY = parts[1].Trim().Replace(',', '.');
@@ -80,12 +80,8 @@ namespace InterpolationApp
                     throw new FormatException(
                         $"Рядок {i + 1}: не вдалося розпізнати y = '{parts[1]}'.");
 
-                if (DataValidator.HasTooManyDecimals(strX))
-                    throw new FormatException(
-                        $"Рядок {i + 1}: X має більше {DataValidator.MaxDecimalPlaces} знаків після коми.");
-                if (DataValidator.HasTooManyDecimals(strY))
-                    throw new FormatException(
-                        $"Рядок {i + 1}: Y має більше {DataValidator.MaxDecimalPlaces} знаків після коми.");
+                x = Math.Round(x, DataValidator.MaxDecimalPlaces, MidpointRounding.AwayFromZero);
+                y = Math.Round(y, DataValidator.MaxDecimalPlaces, MidpointRounding.AwayFromZero);
 
                 if (DataValidator.ExceedsMaxAbsValue(x))
                     throw new FormatException(

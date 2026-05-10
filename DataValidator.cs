@@ -43,9 +43,6 @@ namespace InterpolationApp
             if (!TryParseNumber(val, out double num))
                 return "Некоректний формат числа";
 
-            if (HasTooManyDecimals(val))
-                return $"Помилка: більше {MaxDecimalPlaces} знаків після коми";
-
             if (ExceedsMaxAbsValue(num))
                 return $"Перевищено ліміт {MaxAbsValue:G6} за модулем";
 
@@ -71,11 +68,8 @@ namespace InterpolationApp
                 if (string.IsNullOrEmpty(sy) || !TryParseNumber(sy, out double vy))
                     return (null, $"Рядок {i + 1}: некоректне значення Y.");
 
-                if (HasTooManyDecimals(sx))
-                    return (null, $"Рядок {i + 1}: X має більше {MaxDecimalPlaces} знаків після коми.");
-
-                if (HasTooManyDecimals(sy))
-                    return (null, $"Рядок {i + 1}: Y має більше {MaxDecimalPlaces} знаків після коми.");
+                vx = Math.Round(vx, MaxDecimalPlaces, MidpointRounding.AwayFromZero);
+                vy = Math.Round(vy, MaxDecimalPlaces, MidpointRounding.AwayFromZero);
 
                 if (ExceedsMaxAbsValue(vx))
                     return (null, $"Рядок {i + 1}: |X| = {Math.Abs(vx):G6} перевищує допустимий максимум {MaxAbsValue:G6} за модулем.");
@@ -112,8 +106,7 @@ namespace InterpolationApp
             if (!TryParseNumber(val, out double targetX))
                 return (0, "Некоректне значення x.");
 
-            if (HasTooManyDecimals(val))
-                return (0, $"x має більше {MaxDecimalPlaces} знаків після коми.");
+            targetX = Math.Round(targetX, MaxDecimalPlaces, MidpointRounding.AwayFromZero);
 
             if (ExceedsMaxAbsValue(targetX))
                 return (0, $"|x| = {Math.Abs(targetX):G6} перевищує допустимий максимум {MaxAbsValue:G6} за модулем.");

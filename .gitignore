@@ -8,6 +8,7 @@ obj/
 *.suo
 *.userosscache
 *.sln.docstates
+*.txt
 
 # OS files
 Thumbs.db

@@ -63,13 +63,34 @@ namespace InterpolationApp
         {
             var cell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
             string val = cell.Value?.ToString()?.Trim();
-            cell.ErrorText = DataValidator.ValidateCellValue(val);
+            string err = DataValidator.ValidateCellValue(val);
+            cell.ErrorText = err;
+
+            // Якщо помилок немає і це число — округлюємо відразу після введення
+            if (string.IsNullOrEmpty(err) && !string.IsNullOrEmpty(val))
+            {
+                if (DataValidator.TryParseNumber(val, out double num))
+                {
+                    double rounded = Math.Round(num, DataValidator.MaxDecimalPlaces, MidpointRounding.AwayFromZero);
+                    cell.Value = rounded.ToString(CultureInfo.InvariantCulture);
+                }
+            }
         }
 
         private void TxtX_Validated(object sender, EventArgs e)
         {
             string val = txtX.Text.Trim();
-            errProv.SetError(txtX, DataValidator.ValidateCellValue(val));
+            string err = DataValidator.ValidateCellValue(val);
+            errProv.SetError(txtX, err);
+
+            if (string.IsNullOrEmpty(err) && !string.IsNullOrEmpty(val))
+            {
+                if (DataValidator.TryParseNumber(val, out double num))
+                {
+                    double rounded = Math.Round(num, DataValidator.MaxDecimalPlaces, MidpointRounding.AwayFromZero);
+                    txtX.Text = rounded.ToString(CultureInfo.InvariantCulture);
+                }
+            }
         }
 
         private void BtnDel_Click(object sender, EventArgs e)
@@ -167,9 +188,23 @@ namespace InterpolationApp
                 if (nodesError != null)
                 { ShowMsg(nodesError, true); pnlPoly.Invalidate(); pnlChart.Invalidate(); return; }
 
+                // Оновлюємо таблицю округленими значеннями
+                int nodeIdx = 0;
+                for (int i = 0; i < dgv.Rows.Count; i++)
+                {
+                    string sx = dgv.Rows[i].Cells[0].Value?.ToString();
+                    string sy = dgv.Rows[i].Cells[1].Value?.ToString();
+                    if (string.IsNullOrWhiteSpace(sx) && string.IsNullOrWhiteSpace(sy)) continue;
+                    dgv.Rows[i].Cells[0].Value = nodes[nodeIdx].X.ToString(CultureInfo.InvariantCulture);
+                    dgv.Rows[i].Cells[1].Value = nodes[nodeIdx].Y.ToString(CultureInfo.InvariantCulture);
+                    nodeIdx++;
+                }
+
                 var (targetX, xError) = DataValidator.ValidateTargetX(txtX.Text);
                 if (xError != null)
                 { ShowMsg(xError, true); pnlPoly.Invalidate(); pnlChart.Invalidate(); return; }
+                
+                txtX.Text = targetX.ToString(CultureInfo.InvariantCulture);
 
                 string method = cmbMethod.SelectedItem.ToString();
                 if (method == "Лагранж")
