@@ -114,7 +114,7 @@ namespace InterpolationApp
             if (dlg.ShowDialog() != DialogResult.OK) return;
             try
             {
-                var nodes = FileManager.LoadNodesFromCsv(dlg.FileName);
+                var nodes = FileManager.LoadNodes(dlg.FileName);
                 dgv.Rows.Clear();
                 foreach (var n in nodes)
                     dgv.Rows.Add(n.X.ToString(CultureInfo.InvariantCulture),
@@ -786,6 +786,8 @@ namespace InterpolationApp
             this.txtX.Size = new System.Drawing.Size(150, 25);
             this.txtX.TabIndex = 6;
             this.txtX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.errProv.SetIconAlignment(this.txtX, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+            this.errProv.SetIconPadding(this.txtX, -20);
             this.txtX.Validated += new System.EventHandler(this.TxtX_Validated);
             // 
             // labelX
@@ -871,7 +873,7 @@ namespace InterpolationApp
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(34)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv.ColumnHeadersHeight = 30;
+            this.dgv.ColumnHeadersHeight = 32;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colX,
             this.colY});
@@ -890,7 +892,7 @@ namespace InterpolationApp
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.RowTemplate.Height = 25;
-            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgv.Size = new System.Drawing.Size(240, 282);
             this.dgv.TabIndex = 1;

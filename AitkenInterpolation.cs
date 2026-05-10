@@ -4,6 +4,13 @@ namespace InterpolationApp
 {
     public class AitkenInterpolation
     {
+        /// <summary>
+        /// Обчислює значення інтерполяційного полінома в точці targetX за схемою Ейткена.
+        /// </summary>
+        /// <param name="inputNodes">Список вузлів інтерполяції.</param>
+        /// <param name="targetX">Аргумент для обчислення.</param>
+        /// <param name="operationCount">Кількість виконаних арифметичних операцій.</param>
+        /// <returns>Результат інтерполяції.</returns>
         public static double Evaluate(List<InterpolationPoint> inputNodes, double targetX, out long operationCount)
         {
             ValidateNodes(inputNodes);

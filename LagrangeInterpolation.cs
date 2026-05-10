@@ -1,9 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 namespace InterpolationApp
 {
     public class LagrangeInterpolation
     {
+        /// <summary>
+        /// Обчислює значення інтерполяційного полінома в точці targetX за формулою Лагранжа.
+        /// </summary>
+        /// <param name="inputNodes">Список вузлів інтерполяції.</param>
+        /// <param name="targetX">Аргумент для обчислення.</param>
+        /// <param name="operationCount">Вихідний параметр для підрахунку арифметичних операцій.</param>
+        /// <returns>Інтерпольоване значення.</returns>
         public static double Evaluate(List<InterpolationPoint> inputNodes, double targetX, out long operationCount)
         {
             ValidateNodes(inputNodes);
@@ -39,6 +46,11 @@ namespace InterpolationApp
             return result;
         }
 
+        /// <summary>
+        /// Будує інтерполяційний поліном у явному вигляді (набір коефіцієнтів).
+        /// </summary>
+        /// <param name="inputNodes">Список вузлів.</param>
+        /// <returns>Об'єкт Polynomial.</returns>
         public static Polynomial BuildPolynomial(List<InterpolationPoint> inputNodes)
         {
             ValidateNodes(inputNodes);

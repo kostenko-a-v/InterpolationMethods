@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -46,6 +46,11 @@ namespace InterpolationApp
                 Coefficients = trimmed;
             }
         }
+        /// <summary>
+        /// Обчислює значення полінома в заданій точці x за схемою Горнера.
+        /// </summary>
+        /// <param name="x">Значення аргументу.</param>
+        /// <returns>Значення полінома в точці x.</returns>
         public double Evaluate(double x)
         {
             double result = 0;
@@ -206,6 +211,10 @@ namespace InterpolationApp
             return ToSimplifiedString();
         }
         
+        /// <summary>
+        /// Перетворює поліном у форматований рядок з використанням Unicode-символів для ступенів.
+        /// </summary>
+        /// <returns>Рядок, що представляє поліном.</returns>
         public string ToUnicodeString()
         {
             string s = ToSimplifiedString();
