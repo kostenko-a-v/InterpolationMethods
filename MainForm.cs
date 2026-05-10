@@ -816,7 +816,7 @@ namespace InterpolationApp
             this.btnLoad.Size = new System.Drawing.Size(220, 30);
             this.btnLoad.TabIndex = 4;
             this.btnLoad.Text = "Файл";
-            this.toolTip.SetToolTip(this.btnLoad, "Формат файлу (.txt або .csv):\nКожен рядок — це координати X та Y.\nРозділювачі: пробіл, кома, крапка з комою або табуляція.\n\nПриклад:\n1.5; 2.7\n-3.0; 4.1");
+            this.toolTip.SetToolTip(this.btnLoad, "Формат файлу (.txt або .csv):\nКожен рядок — це координати X та Y.\nРозділювачі: пробіл, крапка з комою або табуляція.\n(Кома використовується для десяткових дробів)\n\nПриклад:\n1,5; 2,7\n-3,0; 4,1");
             this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 

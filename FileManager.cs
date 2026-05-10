@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -64,7 +64,7 @@ namespace InterpolationApp
                 if (i == 0 && (line.StartsWith("x", StringComparison.OrdinalIgnoreCase)))
                     continue;
 
-                string[] parts = line.Split(new[] { ';', ',', ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = line.Split(new[] { ';', ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length < 2)
                     throw new FormatException(
                         $"Рядок {i + 1}: очікується формат 'x;y' (числа будуть округлені за математичними правилами), отримано '{line}'.");
