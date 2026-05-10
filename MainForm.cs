@@ -1007,6 +1007,3 @@ namespace InterpolationApp
         }
     }
 }
-
-
-
