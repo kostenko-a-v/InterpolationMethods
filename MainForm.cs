@@ -413,12 +413,33 @@ namespace InterpolationApp
         private void PnlChart_MouseWheel(object sender, MouseEventArgs e)
         {
             if (resLag == null && resAit == null) return;
+
+            const int ML = 70, MR = 25, MT = 35, MB = 50;
+            var plot = new Rectangle(ML, MT, pnlChart.Width - ML - MR, pnlChart.Height - MT - MB);
+            if (plot.Width < 40 || plot.Height < 40) return;
+
+            GetBounds(out double xMin, out double xMax, out double yMin, out double yMax);
+            double cx = (xMin + xMax) / 2.0;
+            double cy = (yMin + yMax) / 2.0;
+
+            double baseScaleX = (double)plot.Width / (xMax - xMin);
+            double baseScaleY = (double)plot.Height / (yMax - yMin);
+            double baseScale = Math.Min(baseScaleX, baseScaleY);
+
+            double oldScale = baseScale * zoom;
+            double worldX = cx + (e.X - plot.Left - plot.Width / 2.0 - panX) / oldScale;
+            double worldY = cy - (e.Y - plot.Top - plot.Height / 2.0 - panY) / oldScale;
+
             if (e.Delta > 0) zoom *= 1.25;
             else zoom /= 1.25;
 
             if (zoom < 1.0) zoom = 1.0;
             if (zoom > 2e5) zoom = 2e5;
-            
+
+            double newScale = baseScale * zoom;
+            panX = (float)(e.X - (plot.Left + plot.Width / 2.0 + (worldX - cx) * newScale));
+            panY = (float)(e.Y - (plot.Top + plot.Height / 2.0 - (worldY - cy) * newScale));
+
             ClampPan();
             pnlChart.Invalidate();
         }
