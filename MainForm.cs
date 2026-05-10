@@ -346,52 +346,11 @@ namespace InterpolationApp
 
         private void GetBounds(out double xMin, out double xMax, out double yMin, out double yMax)
         {
-            var nodes = (resLag ?? resAit)?.InputNodes;
-            if (nodes == null || nodes.Count == 0)
-            {
-                xMin = -DataValidator.MaxAbsValue;
-                xMax = DataValidator.MaxAbsValue;
-                yMin = -DataValidator.MaxAbsValue;
-                yMax = DataValidator.MaxAbsValue;
-                return;
-            }
-
-            xMin = double.MaxValue; xMax = double.MinValue;
-            yMin = double.MaxValue; yMax = double.MinValue;
-            foreach (var n in nodes)
-            {
-                if (n.X < xMin) xMin = n.X;
-                if (n.X > xMax) xMax = n.X;
-                if (n.Y < yMin) yMin = n.Y;
-                if (n.Y > yMax) yMax = n.Y;
-            }
-
-            // Додаємо відступ 10% з кожного боку
-            double dx = xMax - xMin;
-            double dy = yMax - yMin;
-            if (dx < 1e-9) dx = 1.0;
-            if (dy < 1e-9) dy = 1.0;
-            double pad = 0.1;
-            xMin -= dx * pad;
-            xMax += dx * pad;
-            yMin -= dy * pad;
-            yMax += dy * pad;
-
-            // Зробимо квадратну область (щоб графік не був розтягнутий)
-            double rangeX = xMax - xMin;
-            double rangeY = yMax - yMin;
-            if (rangeX > rangeY)
-            {
-                double mid = (yMin + yMax) / 2;
-                yMin = mid - rangeX / 2;
-                yMax = mid + rangeX / 2;
-            }
-            else
-            {
-                double mid = (xMin + xMax) / 2;
-                xMin = mid - rangeY / 2;
-                xMax = mid + rangeY / 2;
-            }
+            // Фіксовані межі для початкового відображення (відповідають MaxAbsValue)
+            xMin = -DataValidator.MaxAbsValue;
+            xMax = DataValidator.MaxAbsValue;
+            yMin = -DataValidator.MaxAbsValue;
+            yMax = DataValidator.MaxAbsValue;
         }
 
         private void ClampPan()
@@ -409,8 +368,12 @@ namespace InterpolationApp
             double baseScale = Math.Min(baseScaleX, baseScaleY);
             double scale = baseScale * zoom;
 
+            // Обмеження для X (залишаємо в межах -1000..1000)
             float limitX = (float)Math.Max(0, rangeX / 2.0 * scale - plot.Width / 2.0);
-            float limitY = (float)Math.Max(0, rangeY / 2.0 * scale - plot.Height / 2.0);
+            
+            // Обмеження для Y (дозволяємо переміщатись до мільйона)
+            double worldYRange = 1000000.0;
+            float limitY = (float)Math.Max(0, worldYRange * scale - plot.Height / 2.0);
 
             panX = Math.Max(-limitX, Math.Min(limitX, panX));
             panY = Math.Max(-limitY, Math.Min(limitY, panY));
