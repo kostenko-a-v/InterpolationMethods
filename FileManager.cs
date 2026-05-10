@@ -30,7 +30,7 @@ namespace InterpolationApp
             sb.AppendLine();
 
             sb.AppendLine("Інтерполяційний поліном (спрощений вигляд):");
-            sb.AppendLine($"  P(x) = {result.Polynomial?.ToSimplifiedString() ?? "не обчислено"}");
+            sb.AppendLine($"  P(x) = {result.Polynomial?.ToSimplifiedString() ?? "Не обчислено"}");
             sb.AppendLine();
             sb.AppendLine("Обчислене значення:");
             sb.AppendLine($"  x = {result.TargetX:G7}");

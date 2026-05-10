@@ -346,7 +346,6 @@ namespace InterpolationApp
 
         private void GetBounds(out double xMin, out double xMax, out double yMin, out double yMax)
         {
-            // Фіксовані межі для початкового відображення (відповідають MaxAbsValue)
             xMin = -DataValidator.MaxAbsValue;
             xMax = DataValidator.MaxAbsValue;
             yMin = -DataValidator.MaxAbsValue;
@@ -368,10 +367,7 @@ namespace InterpolationApp
             double baseScale = Math.Min(baseScaleX, baseScaleY);
             double scale = baseScale * zoom;
 
-            // Обмеження для X (залишаємо в межах -1000..1000)
             float limitX = (float)Math.Max(0, rangeX / 2.0 * scale - plot.Width / 2.0);
-            
-            // Обмеження для Y (дозволяємо переміщатись до мільйона)
             double worldYRange = 1000000.0;
             float limitY = (float)Math.Max(0, worldYRange * scale - plot.Height / 2.0);
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -47,7 +47,7 @@ namespace InterpolationApp
                 return $"Помилка: більше {MaxDecimalPlaces} знаків після коми";
 
             if (ExceedsMaxAbsValue(num))
-                return $"Перевищено ліміт {MaxAbsValue:G6}";
+                return $"Перевищено ліміт {MaxAbsValue:G6} за модулем";
 
             return "";
         }
@@ -78,10 +78,10 @@ namespace InterpolationApp
                     return (null, $"Рядок {i + 1}: Y має більше {MaxDecimalPlaces} знаків після коми.");
 
                 if (ExceedsMaxAbsValue(vx))
-                    return (null, $"Рядок {i + 1}: |X| = {Math.Abs(vx):G6} перевищує допустимий максимум {MaxAbsValue:G6}.");
+                    return (null, $"Рядок {i + 1}: |X| = {Math.Abs(vx):G6} перевищує допустимий максимум {MaxAbsValue:G6} за модулем.");
 
                 if (ExceedsMaxAbsValue(vy))
-                    return (null, $"Рядок {i + 1}: |Y| = {Math.Abs(vy):G6} перевищує допустимий максимум {MaxAbsValue:G6}.");
+                    return (null, $"Рядок {i + 1}: |Y| = {Math.Abs(vy):G6} перевищує допустимий максимум {MaxAbsValue:G6} за модулем.");
 
                 nodes.Add(new InterpolationPoint(vx, vy));
             }
@@ -116,7 +116,7 @@ namespace InterpolationApp
                 return (0, $"x має більше {MaxDecimalPlaces} знаків після коми.");
 
             if (ExceedsMaxAbsValue(targetX))
-                return (0, $"|x| = {Math.Abs(targetX):G6} перевищує допустимий максимум {MaxAbsValue:G6}.");
+                return (0, $"|x| = {Math.Abs(targetX):G6} перевищує допустимий максимум {MaxAbsValue:G6} за модулем.");
 
             return (targetX, null);
         }
