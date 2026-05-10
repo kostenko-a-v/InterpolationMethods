@@ -47,7 +47,7 @@ namespace InterpolationApp
                 File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
         }
 
-        public static List<InterpolationPoint> LoadNodesFromCsv(string filePath)
+        public static List<InterpolationPoint> LoadNodes(string filePath)
         {
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Файл не знайдено.", filePath);
