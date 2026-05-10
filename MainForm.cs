@@ -897,23 +897,14 @@ namespace InterpolationApp
             this.dgv.Size = new System.Drawing.Size(240, 282);
             this.dgv.TabIndex = 1;
             this.dgv.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_CellValidated);
-            // 
-            // colX
-            // 
             this.colX.HeaderText = "X";
             this.colX.Name = "colX";
             this.colX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colX.Width = 120;
-            // 
-            // colY
-            // 
             this.colY.HeaderText = "Y";
             this.colY.Name = "colY";
             this.colY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colY.Width = 120;
-            // 
-            // labelInputData
-            // 
             this.labelInputData.BackColor = System.Drawing.Color.Transparent;
             this.labelInputData.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelInputData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
@@ -924,9 +915,6 @@ namespace InterpolationApp
             this.labelInputData.Size = new System.Drawing.Size(240, 45);
             this.labelInputData.TabIndex = 0;
             this.labelInputData.Text = "ВХІДНІ ДАНІ";
-            // 
-            // panelRight
-            // 
             this.panelRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.panelRight.Controls.Add(this.pnlChart);
             this.panelRight.Controls.Add(this.pnlPoly);
@@ -936,9 +924,6 @@ namespace InterpolationApp
             this.panelRight.Padding = new System.Windows.Forms.Padding(10);
             this.panelRight.Size = new System.Drawing.Size(577, 677);
             this.panelRight.TabIndex = 1;
-            // 
-            // pnlChart
-            // 
             this.pnlChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChart.Location = new System.Drawing.Point(10, 110);
@@ -951,9 +936,6 @@ namespace InterpolationApp
             this.pnlChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PnlChart_MouseUp);
             this.pnlChart.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.PnlChart_MouseWheel);
             this.pnlChart.Resize += new System.EventHandler(this.PnlChart_Resize);
-            // 
-            // pnlPoly
-            // 
             this.pnlPoly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
             this.pnlPoly.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPoly.Location = new System.Drawing.Point(10, 10);
@@ -961,20 +943,11 @@ namespace InterpolationApp
             this.pnlPoly.Size = new System.Drawing.Size(557, 100);
             this.pnlPoly.TabIndex = 0;
             this.pnlPoly.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlPoly_Paint);
-            // 
-            // toolTip
-            // 
             this.toolTip.AutoPopDelay = 10000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 500;
-            // 
-            // errProv
-            // 
             this.errProv.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errProv.ContainerControl = this;
-            // 
-            // MainForm
-            // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(817, 677);
